@@ -1,0 +1,40 @@
+openapi: 3.0.0
+info:
+  title: Freshdesk
+  description: API Specification for Freshdesk
+  version: 1.0.0
+servers:
+  - url: ${{OPENAPI_SERVER_URL}}/api
+    description: The Freshdesk ticket api server
+
+paths:
+  /tickets:
+    get:
+      operationId: listtickets
+      summary: List all tickets
+      description: Returns a list of tickets with their details
+      responses:
+        '200':
+          description: A list of tickets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: The unique identifier of the tickets
+                        priority:
+                          type: integer
+                          description: Priority level of the tickets
+                        status:
+                          type: integer
+                          description: Status of the tickets
+                        subject:
+                          type: string
+                          description: Subject of the ticket
