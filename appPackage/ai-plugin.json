@@ -41,6 +41,19 @@
           }
         }
       } 
+    },
+    {
+      "name": "createticket",
+      "description":"Create a new Freshdesk ticket",
+      "capabilities": {
+        "response_semantics": {
+          "data_path": "$.results",
+          "properties":{
+            "title": "$.title",
+            "subtitle": "$.results.status"
+          }
+        }
+      }
     }    
   ],
   "runtimes": [
@@ -54,13 +67,16 @@
         "url": "apiSpecificationFile/tickets.yml",
         "progress_style": "ShowUsageWithInputAndOutput"
       },
-      "run_for_functions": ["listtickets"]
+      "run_for_functions": ["listtickets","createticket"]
     }
   ],
   "capabilities": {
     "conversation_starters": [
       {
         "text": "List all tickets"
+      },
+      {
+        "text": "Create a new ticket"
       }
     ]
   }

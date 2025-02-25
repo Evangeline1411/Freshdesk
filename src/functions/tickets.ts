@@ -26,7 +26,21 @@ const gettickets = async(): Promise<any> =>{
   }
 };
 
-
+// creating tickets
+const createTicket= async(ticketData: any): Promise<any> =>{
+  const auth=Buffer.from(`${apiKey}:X`).toString('base64');
+  const headers={
+    'Authorization':`Basic ${auth}`,
+    'Accept': 'application/json',
+  };
+  try{
+    const response=await axios.post(baseURL,ticketData, {headers});
+    return response.data;
+  }catch(error){
+    console.error("Error creating ticket");
+    throw new Error("Failed to create Ticket")
+  }
+};
 
 /**
  * This function handles the HTTP request and returns the tickets information.
@@ -59,11 +73,31 @@ export async function tickets(
 
       };
     }
+  }else if(req.method === "POST"){
+    console.log("POST request processing");
+
+    try{
+      const body= await req.json();
+      const ticket = await createTicket(body);
+      return{
+        status: 201,
+        jsonBody:{
+          message: `Ticket [${ticket.id}] created successfully`,
+          results:ticket,
+        },
+      }
+      }catch(error){
+        return{
+          status: 500,
+          jsonBody:{error: "Ticket creation failed"},
+        }
+      }
+    }
+
   }
-}
 
 app.http("tickets", {
-  methods: ["GET"],
+  methods: ["GET", "POST"],
   authLevel: "anonymous",
   handler: tickets,
 });

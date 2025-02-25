@@ -6,10 +6,22 @@
     "instructions": "$[file('instruction.txt')]",
     "conversation_starters": [
         {
-            "text": "Show me all the tickets"
+            "text": "List all Open tickets"
         },
         {
-            "text": "Retrieve Ticket ID: "
+            "text": "Get details for ticket ID [ID]"
+        },
+        {
+            "text": "What is the sentiment score for Ticket [ID]"
+        },
+        {
+            "text": "List all high-priority tickets from the last 7 days"
+        },
+        {
+            "text": "Show me tickets with negative sentiment in the last week"
+        },
+        {
+            "text": "Raise a new ticket"
         }
     ],
     "actions": [

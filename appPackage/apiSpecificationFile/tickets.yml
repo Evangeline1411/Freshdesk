@@ -38,3 +38,56 @@ paths:
                         subject:
                           type: string
                           description: Subject of the ticket
+    post:
+      operationId: createticket
+      summary: Creates a ticket with its details
+      description: Creates a new ticket with the provided details
+      requestBody: 
+        required: true
+        content: 
+          application/json:
+            schema:
+              type: object
+              required:
+                  - description
+                  - subject
+                  - email
+                  - status
+                  - priority
+              properties:
+                description:
+                  type: string
+                  description: Issue details
+                subject:
+                  type: string
+                  description: Ticket title
+                email:
+                  type: string
+                  description: Requester email
+                status:
+                  type: integer
+                  description: status of the ticket
+                priority:
+                  type: integer
+                  description: Priority of the ticket
+
+      responses:
+        '201':
+          description: Ticket created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: Ticket ID
+                  subject:
+                    type: string
+                    description: Ticket title
+                  priority:
+                    type: integer
+                    description: Priority of ticket
+                  status:
+                    type: integer
+                    description: status of ticket
